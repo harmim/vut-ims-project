@@ -1,8 +1,7 @@
 # Author: Dominik Harmim <xharmi00@stud.fit.vutbr.cz>
 
-DOC = dokumentace
-
-INC_DIR = inc
+DOC := documentation
+INC_DIR := inc
 
 
 $(DOC).pdf: $(DOC).tex
