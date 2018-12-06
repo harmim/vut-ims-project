@@ -8,7 +8,6 @@
 
 
 #include <simlib.h>
-
 #include "AverageUniformDistribution.hpp"
 
 

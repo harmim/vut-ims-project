@@ -7,6 +7,7 @@
  */
 
 
+#include <cstdio>
 #include "WorkShiftTimer.hpp"
 
 
@@ -18,5 +19,13 @@ WorkShiftTimer::WorkShiftTimer(WorkShift *workShift): workShift(workShift)
 
 void WorkShiftTimer::Behavior()
 {
+	printEndOfShift();
+
 	delete workShift;
+}
+
+
+void WorkShiftTimer::printEndOfShift()
+{
+	printf("End of work shift because timer elapsed.\n");
 }

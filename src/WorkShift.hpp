@@ -23,14 +23,8 @@ public:
 	 * @param cars Number of cars.
 	 * @param foodAverage Average number of food to be distributed.
 	 * @param foodDeviation Deviation from average number of food.
-	 * @param carCapacity Car food capacity.
 	 */
-	WorkShift(
-		unsigned long cars,
-		double foodAverage,
-		double foodDeviation,
-		unsigned long carCapacity
-	);
+	WorkShift(unsigned long cars, double foodAverage, double foodDeviation);
 
 	/**
 	 * Desctructs work shift process.
@@ -44,21 +38,34 @@ public:
 
 private:
 	/**
-	 * Car store pointer.
+	 * Car store.
 	 */
 	Store *cars;
 
 	/**
-	 * Number of food to be distributed pointer.
+	 * Number of food to be distributed.
 	 */
 	unsigned long *food;
 
 	/**
-	 * Car food capacity.
+	 * Car loading duration statistics.
 	 */
-	unsigned long carCapacity;
+	Stat *carLoadingStat;
 
-	Histogram *foodHistogram;
+	/**
+	 * Car ride duration statistics.
+	 */
+	Stat *carRideStat;
+
+	/**
+	 * Prints start of shift information.
+	 */
+	void printStartOfShift();
+
+	/**
+	 * Prints end of shift information.
+	 */
+	void printEndOfShift();
 };
 
 

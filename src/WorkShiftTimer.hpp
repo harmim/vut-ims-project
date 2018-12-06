@@ -12,7 +12,6 @@
 
 
 #include <simlib.h>
-
 #include "WorkShift.hpp"
 
 
@@ -22,7 +21,7 @@ public:
 	/**
 	 * Constructs work shift timer event.
 	 *
-	 * @param workShift Work shift process pointer which will be killed
+	 * @param workShift Work shift process which will be killed
 	 *                  after work shift duration.
 	 */
 	explicit WorkShiftTimer(WorkShift *workShift);
@@ -39,10 +38,15 @@ private:
 	const double WORK_SHIFT_DURATION = 6.0 * 60.0;
 
 	/**
-	 * Work shift process pointer which will be killed
+	 * Work shift process which will be killed
 	 * after work shift duration.
 	 */
 	WorkShift *workShift;
+
+	/**
+	 * Prints end of shift information.
+	 */
+	void printEndOfShift();
 };
 
 

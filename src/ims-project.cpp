@@ -16,10 +16,8 @@
 int main()
 {
 	Init(0.0, 24.0 * 60.0);
-	(new WorkShift(20, 8000.0, 20.0, 300))->Activate();
-//	(new WorkShift(4, 10000.0, 20.0, 300))->Activate();
+	(new WorkShift(16, 21200.0, 4.7))->Activate();
 	Run();
-
 	SIMLIB_statistics.Output();
 
 	return EXIT_SUCCESS;

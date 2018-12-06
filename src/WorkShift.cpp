@@ -6,8 +6,8 @@
  * @author Vojtech Hertl <xhertl04@stud.fit.vutbr.cz>
  */
 
-#include <cstdio>
 
+#include <cstdio>
 #include "WorkShift.hpp"
 #include "WorkShiftTimer.hpp"
 #include "Car.hpp"
@@ -15,38 +15,39 @@
 
 
 WorkShift::WorkShift(
-	unsigned long cars,
-	double foodAverage,
-	double foodDeviation,
-	unsigned long carCapacity
-): carCapacity(carCapacity)
+	unsigned long cars, double foodAverage, double foodDeviation
+)
 {
-	this->cars = new Store("Auta", cars);
+	this->cars = new Store("Car store", cars);
 
+	// Round number of food to be divisible by car capacity.
 	food = new unsigned long(static_cast<unsigned long>(
 		AverageUniformDistribution::generate(foodAverage, foodDeviation)
 	));
-	unsigned long remainder = *food % carCapacity;
-	if (remainder < carCapacity / 2.0)
+	unsigned long remainder = *food % Car::CAR_CAPACITY;
+	if (remainder < Car::CAR_CAPACITY / 2.0)
 	{
 		*food -= remainder;
 	}
 	else
 	{
-		*food += carCapacity - remainder;
+		*food += Car::CAR_CAPACITY - remainder;
 	}
 
-	foodHistogram = new Histogram("Jidlo k rozvozu", 0.0, 500.0, 20);
+	carLoadingStat = new Stat("Car loading duration.");
+	carRideStat = new Stat("Car ride duration.");
+
+	printStartOfShift();
 }
 
 
 WorkShift::~WorkShift()
 {
-	cars->Output();
-	foodHistogram->Output();
+	printEndOfShift();
 
-	delete foodHistogram;
 	delete food;
+	delete carLoadingStat;
+	delete carRideStat;
 }
 
 
@@ -54,25 +55,50 @@ void WorkShift::Behavior()
 {
 	auto *workShiftTimer = new WorkShiftTimer(this);
 
+	// While there is food left and there is free car, take it and start
+	// car process.
 	while (*food > 0)
 	{
 		Enter(*cars, 1);
 
+		// If food has been taken during waiting for car, leave the car.
 		if (*food == 0)
 		{
 			Leave(*cars, 1);
 			break;
 		}
 
-		printf("Cas: % g\n", Time);
-		printf("Pocet jidel na sklade: %lu\n\n", *food);
-		(*foodHistogram)(*food);
-
-		(new Car(cars, food, carCapacity))->Activate();
+		// Start car process.
+		(new Car(cars, food, carLoadingStat, carRideStat))->Activate();
 	}
 
+	// Wait for all cars and then end the work shift.
 	Enter(*cars, cars->Capacity());
 	Leave(*cars, cars->Capacity());
 
 	delete workShiftTimer;
+}
+
+
+void WorkShift::printStartOfShift()
+{
+	printf("////////////////////////////////////////////////////////////\n\n");
+	printf("Work shift started.\n");
+	printf("\tStart time: %g.\n", Time);
+	printf("\tNumber of cars: %lu.\n", cars->Capacity());
+	printf("\tNumber of food: %lu.\n", *food);
+	printf("\n");
+}
+
+
+void WorkShift::printEndOfShift()
+{
+	printf("End of work shift.\n");
+	printf("\tEnd time: %g.\n", Time);
+	printf("\tNumber of food left: %lu.\n", *food);
+	printf("\n");
+	cars->Output();
+	carLoadingStat->Output();
+	carRideStat->Output();
+	printf("////////////////////////////////////////////////////////////\n");
 }

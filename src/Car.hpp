@@ -18,13 +18,24 @@ class Car : public Process
 {
 public:
 	/**
+	 * Car food capacity.
+	 */
+	static const unsigned long CAR_CAPACITY = 500;
+
+	/**
 	 * Creates car process.
 	 *
-	 * @param cars Car store pointer.
-	 * @param food Number of food to be distributed pointer.
-	 * @param carCapacity Car food capacity.
+	 * @param cars Car store.
+	 * @param food Number of food to be distributed.
+	 * @param carLoadingStat Car loading duration statistics.
+	 * @param carRideStat Car ride duration statistics.
 	 */
-	Car(Store *cars, unsigned long *food, unsigned long carCapacity);
+	Car(
+		Store *cars,
+		unsigned long *food,
+		Stat *carLoadingStat,
+		Stat *carRideStat
+	);
 
 	/**
 	 * Car process behaviour.
@@ -35,29 +46,34 @@ private:
 	/**
 	 * Car loading duration.
 	 */
-	const double CAR_LOADING_DURATION_AVERAGE = 20.0; // in minutes
-	const double CAR_LOADING_DURATION_DEVIATION = 10.0; // in percentage
+	const double CAR_LOADING_DURATION_AVERAGE = 11.0; // in minutes
+	const double CAR_LOADING_DURATION_DEVIATION = 27.1; // in percentage (3 min)
 
 	/**
 	 * Car ride duration.
 	 */
-	const double CAR_RIDE_DURATION_AVERAGE = 2.0 * 60.0; // in minutes (2 h)
-	const double CAR_RIDE_DURATION_DEVIATION = 20.0; // in percentage
+	const double CAR_RIDE_DURATION_AVERAGE = 97.0; // in minutes
+	const double CAR_RIDE_DURATION_DEVIATION = 12.4; // in percentage (12 min)
 
 	/**
-	 * Car store pointer.
+	 * Car store.
 	 */
 	Store *cars;
 
 	/**
-	 * Number of food to be distributed pointer.
+	 * Number of food to be distributed.
 	 */
 	unsigned long *food;
 
 	/**
-	 * Car food capacity.
+	 * Car loading duration statistics.
 	 */
-	unsigned long carCapacity;
+	Stat *carLoadingStat;
+
+	/**
+	 * Car ride duration statistics.
+	 */
+	Stat *carRideStat;
 };
 
 
