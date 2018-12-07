@@ -66,10 +66,14 @@
 	V~této práci je řešen proces sestavování modelu \cite[snímek 7]{IMS_slides}
 	pro rozvoz jídla po Brně firmou Freshbox \cite{Freshbox} a~jeho následná
 	simulace \cite[snímek 33]{IMS_slides}. Díky tomuto modelu a~simulačním
-	experimentům \cite[snímek 9]{Freshbox} nad ním je možno pozorovat
+	experimentům \cite[snímek 9]{IMS_slides} nad ním je možno pozorovat
 	efektivitu a~přínos v~různých podmínkách. Smyslem experimentů je zjistit,
 	jak kvalitně navržený je systém \cite[snímek 18]{IMS_slides} a~zda by se
-	změnou některého z~ovlivňujících faktorů mohl zdokonalit.
+	změnou některého z~ovlivňujících faktorů mohl zdokonalit. V~reálném
+	systému může být obtížné a~finančně nákladné tyto ovlivňující faktory
+	měnit a~zjišťovat, jak se bude systém chovat, proto je vhodné získat
+	nové znalosti o~reálném systému použitím principů modelování
+	a~simulace \cite[snímek 9]{IMS_slides}.
 
 
 	\subsection{Autoři, zdroje}
@@ -88,7 +92,8 @@
 	Ověřování validity \cite[snímek 37]{Freshbox} probíhalo telefonicky
 	a~elektronicky s~vedoucí firmy Freshox, magistrou Obadalovou. Na základě
 	této komunikace byla získána všechna data potřebná k~experimentálnímu
-	ověřování validity modelu. Validita byla také ověřena pomocí experimentů
+	ověřování validity modelu. Statistická data byla extrahována z~naměřených
+	statistik firmy Freshbox. Validita byla také ověřena pomocí experimentů
 	a~srovnáním s~realitou.
 
 
@@ -99,21 +104,25 @@
 	Všechna použitá fakta jsou zprůměrována ze všech získaných informací. \\
 
 	Zákazníci mají předem objednaná jidla od firmy Freshbox, která tato jídla
-	každý den od 6:30 hod. do 12:30 hod. rozváží zákazníkům po Brně a~okolí.
-	Firma Freshbox rozváží jidlo A auty, přičemž jedno auto
-	je schopné naložit  maximálně B jídel. Každý den se rozváží
-	průměrně C jídel. Firma má na začátku rozvozu již všechna jídla
-	připravena a~v~6:30 se připraví všechna auta, do kterých se naloží
-	maximální počet jídel, který je dán kapacitou auta. Naložení jednoho
-	auta průměrně trvá D minut. Rozvoz všech jídel jednoho auta
-	trvá průměrně E minut. Při tomto rozvozu každé auto urazí
-	průměrně F km. Pro rozvoz se požívají auta značky Volkswagen Caddy TDI.
-	Tato auta mají spotřebu H l/100km banzínu/nafty. Když auto rozveze
-	všechna naložená jídla, vrátí se na pobočku Freshbox, aby se mohla
-	naložit další jídla. Tento proces se opakuje tak dlouho, dokud nejsou
-	rozvezena všechna jídla. Jeden zákazník (právnická nebo fyzická osoba)
-	si samozřejmě může objednat více jídel na jedno místo doručení.
-	Průměrná hodnota objednávky jednoho zákazníka v~jeden den činí I Kč.
+	každý den od 6:30 hodin do 12:30 hodin (tj. 6 hodin) rozváží zákazníkům po
+	Brně a~okolí. Firma Freshbox rozváží jidlo 16 auty, přičemž jedno auto
+	je schopné naložit maximálně 500 jídel. Každý den se rozváží
+	průměrně 21\,200 jídel $\pm$~1\,000 jídel. Firma má na začátku rozvozu
+	již všechna jídla připravena a~v~6:30 hodin se připraví všechna auta,
+	do kterých se naloží maximální počet jídel, který je dán maximální
+	kapacitou auta. Naložení jednoho auta průměrně trvá 11 minut
+	$\pm$~3 minuty. Rozvoz všech jídel jednoho auta trvá průměrně 97 minut
+	$\pm$~12 minut. Při tomto rozvozu každé auto urazí průměrně 43 km
+	$\pm$ 8 km. Pro rozvoz se požívají auta Volkswagen Caddy 1.9 TDI.
+	Tato auta mají spotřebu
+	7,7\,l/100\,km\footnote{\url{https://www.auto-data.net/en/volkswagen-caddy-maxi-life-typ-2k-1.9-tdi-105hp-8855}}
+	nafty při městském provozu. Když auto rozveze všechna
+	naložená jídla, vrátí se na pobočku Freshbox, aby se mohla naložit další
+	jídla. Samotné nakládání jídel provádí sám řadič daného auta. Tento proces
+	se opakuje tak dlouho, dokud nejsou rozvezena všechna jídla. Jeden zákazník
+	(právnická nebo fyzická osoba) si samozřejmě může objednat více jídel na
+	jedno místo doručení, což se typicky děje, protože pravidelnými zákazníky
+	jsou firmy, které si objednávají denně řádově desítky jídel.
 
 
 	\subsection{Použité postupy}
@@ -121,17 +130,31 @@
 	Pro vytvoření modelu byl použit programovací jazyk C++ za podpory
 	simulační knihovny SIMLIB \cite{SIMLIB}. Tyto technologie jsou ideální pro
 	řešení zadaného problému, jelikož poskytují všechna potřebná rozhraní
-	k~implementaci modelu. Dále byly použity postupy popsané v textech
-	ke kursu Modelování a simulace na FIT VUT v~Brně \cite{IMS_slides}
+	k~implementaci modelu. Další výhodou je, že se jedná o~otevřený software,
+	jsou to multi-platformní technologie a~poměrně jednuduše se používají,
+	nejedná se o~nic zbytečně těžkopádného. Dále byly použity postupy popsané
+	v~textech ke kursu Modelování a simulace na FIT VUT v~Brně \cite{IMS_slides}
 	k~vytváření Petriho sítě \cite[snímek 123]{IMS_slides} a~samotnému
 	programování za použití knihovny SIMLIB.
 
 
 	\subsection{Popis původu použitých metod/technologií}
 
-	TODO vyjmenovat všechny technologie a autory u nich, např.
-	Knihovna SIMLIB ve verzi ..., autor Dr. Ing. Petr Peringer.
-	-- až nakonec, až budu vědět, co všechno se použilo
+	Použili jsme standardní třídy a~funkce jazyka
+	C++\footnote{\url{https://cppreference.com/w/cpp}}.
+	Drželi jsme se standardu C++14. Využívali jsme monžosti oběktově
+	orientovaného návrhu.
+
+	Pro překlad zdrojových souborů byly použity nástroje
+	CMake\footnote{\url{https://cmake.org}}
+	a~GNU Make\footnote{\url{https://www.gnu.org/software/make}}.
+
+	Knihovna SIMLIB byla získána z~oficálních stránek tohoto
+	nástroje\footnote{\url{http://www.fit.vutbr.cz/~peringer/SIMLIB}}.
+	Použili jsme nejnovější dostupnou verzi (ke dni \today), tj 3.07.
+	Autory tohoto nástroje jsou Petr Peringer, David Leska a David Martinek,
+	viz \cite{SIMLIB}. Pro účely vytvoření našeho simulačního modelu jsme
+	používali standardní nástroje a~rohraní této knihovny.
 
 
 
