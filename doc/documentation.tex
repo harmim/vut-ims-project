@@ -161,24 +161,24 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Koncepce modelu %%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Koncepce modelu}
 
-	V~této sekci se zpracovává návrh konceptuálního modelu[TODO] nad
-	systémem, který je brán jako systém hromadné obsluhy. Při vytváření
-	je potřeba vybrat ze všech údajů ty podstatné informace pro model. Jak lze
-	vyčíst z~rozboru tématu, důležité je, namodelovat všecho, co souvisí
-	se samotným rozvozem. Díky skutečnosti, že časové údaje jsou průměry
-	zjištěných časů, je zřejmé, že bude dostatečné simulovat průběh
-	jednoho dne, přičemž se samozřejmě může den ode dne nepatrně lišit.
-	Na všechny časové údaje při modelování se tedy použije rovnoměrné
-	rozdělení[TODO] s~určitým rozptylem. Aby se model zjednodušil,
-	průměrný počet jídel, který se každý den rozváží, se zaokrouhlí,
-	aby byl dělitelný maximální kapacitou aut. Na validitu to má nepatrný
-	vliv, dá se říci, že zanedbatelný. Dále značka auta, spotřeba paliva
-	a~cena nejsou pro model důležitá, tyto informace budou použity při
-	zefektivňování systému. Přesto, že tato situace reálně často nenastává,
-	pro lepší experimentování je přidán druhý koncový stav, který znamená,
-	že směna skončí dříve než jsou rozvezena všechna jídla, tedy nějaká
-	jídla zbydou na skladě. Předpokládá se také, že auto, které započne
-	ještě během pracovní směny svůj cyklus, ho celý dokončí.
+	V~této sekci se zpracovává návrh konceptuálního modelu[snímek 48]\cite{IMS_slides} nad
+	systémem, který je brán ze své podstaty jako systém hromadné obsluhy. Při vytváření
+	je potřeba vybrat ze všech údajů ty podstatné informace pro model. Z~rozboru tématu 
+	plyne, že je důležité namodelovat všecho, co souvisí se samotným rozvozem. Díky 
+	skutečnosti, že všechny jednotlivé údaje jsou zprůměrovány, je zapotřebí simulovat průběh
+	jednoho dne, přičemž se samozřejmě může den ode dne nepatrně lišit.	Na oba proměnné 
+	časové údaje při modelování se tedy použije rovnoměrné rozdělení[snímek 89]\cite{IMS_slides}
+	s~vyhovující odchylkou. Aby se model zjednodušil, průměrný počet jídel, který se 
+	každý den rozváží, se zaokrouhlí, aby byl dělitelný maximální kapacitou aut. Na 
+	validitu to má nepatrný	vliv až zanedbatelný jelikož jsou údaje zprůměrovány. Dále 
+	značka auta, spotřeba paliva a~cena nejsou pro model důležitá, tyto informace budou 
+	použity při	zefektivňování systému. Přesto, že tato situace reálně často, díky již 
+	nabraným zkušenostem z reality, nenastává, pro lepší experimentování je přidán druhý 
+	koncový stav, který znamená, že směna skončí dříve než jsou rozvezena všechna jídla, 
+	tedy nějaká	jídla zbydou na skladě. Tento stav značí úspěšné dokončení směny, protože 
+	se stihlo rozvést všechno jídlo v časovém limitu. Předpokládá se také, že auto, které 
+	započne ještě během pracovní směny svůj cyklus, ho celý dokončí. Ovšem pokud mezitím 
+	skončila směna, znamená to, že byl rozvoz neúspěšný z časového hlediska.
 
 
 	\subsection{Popis konceptuálního modelu}
@@ -192,13 +192,13 @@
 	začnou se nakládat. Pokud je však některé z~aut připraveno na rozvoz,
 	ale již byla všechna jídla rozvezena, skončí pracovní směna. Po
 	naložení jídel se auto vydá na cestu a všechna jídla rozveze. Po ukončení
-	této činnosti je auto zase volné a~připraveno k použití.
+	této činnosti je auto zase volné a~připraveno k dalšímu použití.
 
 
 	\subsection{Forma konceptuálního modelu}
 
-	Model je vizualizován pomocí Petriho sítě[TODO] v~příloze
-	\ref{appendix:petri_net}.
+	Model je vizualizován pomocí Petriho sítě v~příloze
+	\ref{appendix:petri_net} a doplněn informacemi a legendou.
 
 
 
