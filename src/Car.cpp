@@ -11,15 +11,20 @@
 #include "AverageUniformDistribution.hpp"
 
 
-Car::Car(Store *cars,
+Car::Car(
+	Store *cars,
 	unsigned long *food,
 	Stat *carLoadingStat,
-	Stat *carRideStat
-):
+	Stat *carRideStat,
+	Stat *carRideDistanceStat,
+	Stat *carRideConsumptionStat
+) :
 	cars(cars),
 	food(food),
 	carLoadingStat(carLoadingStat),
-	carRideStat(carRideStat)
+	carRideStat(carRideStat),
+	carRideDistanceStat(carRideDistanceStat),
+	carRideConsumptionStat(carRideConsumptionStat)
 {
 }
 
@@ -39,6 +44,12 @@ void Car::Behavior()
 	);
 	(*carRideStat)(carRideDuration);
 	Wait(carRideDuration);
+
+	double carRideDistance = AverageUniformDistribution::generate(
+		CAR_RIDE_DISTANCE_AVERAGE, CAR_RIDE_DISTANCE_DEVIATION
+	);
+	(*carRideDistanceStat)(carRideDistance);
+	(*carRideConsumptionStat)(carRideDistance / 100.0 * CAR_CONSUMPTION);
 
 	Leave(*cars, 1);
 }

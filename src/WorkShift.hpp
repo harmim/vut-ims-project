@@ -58,6 +58,16 @@ private:
 	Stat *carRideStat;
 
 	/**
+	 * Car ride distance statistics.
+	 */
+	Stat *carRideDistanceStat;
+
+	/**
+	 * Car ride fuel consumption statistics.
+	 */
+	Stat *carRideConsumptionStat;
+
+	/**
 	 * Prints start of shift information.
 	 */
 	void printStartOfShift();

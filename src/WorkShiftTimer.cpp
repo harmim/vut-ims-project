@@ -11,7 +11,7 @@
 #include "WorkShiftTimer.hpp"
 
 
-WorkShiftTimer::WorkShiftTimer(WorkShift *workShift): workShift(workShift)
+WorkShiftTimer::WorkShiftTimer(WorkShift *workShift) : workShift(workShift)
 {
 	Activate(Time + WORK_SHIFT_DURATION);
 }

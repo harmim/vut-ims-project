@@ -34,8 +34,10 @@ WorkShift::WorkShift(
 		*food += Car::CAR_CAPACITY - remainder;
 	}
 
-	carLoadingStat = new Stat("Car loading duration.");
-	carRideStat = new Stat("Car ride duration.");
+	carLoadingStat = new Stat("Car loading duration");
+	carRideStat = new Stat("Car ride duration");
+	carRideDistanceStat = new Stat("Car ride distance");
+	carRideConsumptionStat = new Stat("Car ride consumption");
 
 	printStartOfShift();
 }
@@ -48,6 +50,8 @@ WorkShift::~WorkShift()
 	delete food;
 	delete carLoadingStat;
 	delete carRideStat;
+	delete carRideDistanceStat;
+	delete carRideConsumptionStat;
 }
 
 
@@ -69,7 +73,14 @@ void WorkShift::Behavior()
 		}
 
 		// Start car process.
-		(new Car(cars, food, carLoadingStat, carRideStat))->Activate();
+		(new Car(
+			cars,
+			food,
+			carLoadingStat,
+			carRideStat,
+			carRideDistanceStat,
+			carRideConsumptionStat
+		))->Activate();
 	}
 
 	// Wait for all cars and then end the work shift.
@@ -96,9 +107,16 @@ void WorkShift::printEndOfShift()
 	printf("End of work shift.\n");
 	printf("\tEnd time: %g.\n", Time);
 	printf("\tNumber of food left: %lu.\n", *food);
+	printf("\tTotal car ride distance: %g.\n", carRideDistanceStat->Sum());
+	printf(
+		"\tTotal cars consumption: %g.\n",
+		carRideDistanceStat->Sum() / 100.0 * Car::CAR_CONSUMPTION
+	);
 	printf("\n");
 	cars->Output();
 	carLoadingStat->Output();
 	carRideStat->Output();
+	carRideDistanceStat->Output();
+	carRideConsumptionStat->Output();
 	printf("////////////////////////////////////////////////////////////\n");
 }

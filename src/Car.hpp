@@ -23,18 +23,27 @@ public:
 	static const unsigned long CAR_CAPACITY = 500;
 
 	/**
+	 * Car fuel consumption.
+	 */
+	static constexpr double CAR_CONSUMPTION = 7.7; // l/100 km
+
+	/**
 	 * Creates car process.
 	 *
 	 * @param cars Car store.
 	 * @param food Number of food to be distributed.
 	 * @param carLoadingStat Car loading duration statistics.
 	 * @param carRideStat Car ride duration statistics.
+	 * @param carRideDistanceStat Car ride distance statistics.
+	 * @param carRideConsumptionStat Car ride fuel consumption statistics.
 	 */
 	Car(
 		Store *cars,
 		unsigned long *food,
 		Stat *carLoadingStat,
-		Stat *carRideStat
+		Stat *carRideStat,
+		Stat *carRideDistanceStat,
+		Stat *carRideConsumptionStat
 	);
 
 	/**
@@ -47,13 +56,19 @@ private:
 	 * Car loading duration.
 	 */
 	const double CAR_LOADING_DURATION_AVERAGE = 11.0; // in minutes
-	const double CAR_LOADING_DURATION_DEVIATION = 27.1; // in percentage (3 min)
+	const double CAR_LOADING_DURATION_DEVIATION = 27.1; // in percentage
 
 	/**
 	 * Car ride duration.
 	 */
 	const double CAR_RIDE_DURATION_AVERAGE = 97.0; // in minutes
-	const double CAR_RIDE_DURATION_DEVIATION = 12.4; // in percentage (12 min)
+	const double CAR_RIDE_DURATION_DEVIATION = 12.4; // in percentage
+
+	/**
+	 * Car ride distance.
+	 */
+	const double CAR_RIDE_DISTANCE_AVERAGE = 43.0; // in km
+	const double CAR_RIDE_DISTANCE_DEVIATION = 18.6; // in perentage
 
 	/**
 	 * Car store.
@@ -74,6 +89,16 @@ private:
 	 * Car ride duration statistics.
 	 */
 	Stat *carRideStat;
+
+	/**
+	 * Car ride distance statistics.
+	 */
+	Stat *carRideDistanceStat;
+
+	/**
+	 * Car ride fuel consumption statistics.
+	 */
+	Stat *carRideConsumptionStat;
 };
 
 
