@@ -72,10 +72,11 @@ void WorkShift::Behavior()
 			break;
 		}
 
+		*food -= Car::CAR_CAPACITY;
+
 		// Start car process.
 		(new Car(
 			cars,
-			food,
 			carLoadingStat,
 			carRideStat,
 			carRideDistanceStat,

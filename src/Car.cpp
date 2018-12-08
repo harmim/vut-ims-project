@@ -13,14 +13,12 @@
 
 Car::Car(
 	Store *cars,
-	unsigned long *food,
 	Stat *carLoadingStat,
 	Stat *carRideStat,
 	Stat *carRideDistanceStat,
 	Stat *carRideConsumptionStat
 ) :
 	cars(cars),
-	food(food),
 	carLoadingStat(carLoadingStat),
 	carRideStat(carRideStat),
 	carRideDistanceStat(carRideDistanceStat),
@@ -31,8 +29,6 @@ Car::Car(
 
 void Car::Behavior()
 {
-	*food -= CAR_CAPACITY;
-
 	double carLoadingDuration = AverageUniformDistribution::generate(
 		CAR_LOADING_DURATION_AVERAGE, CAR_LOADING_DURATION_DEVIATION
 	);

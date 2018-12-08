@@ -31,7 +31,6 @@ public:
 	 * Creates car process.
 	 *
 	 * @param cars Car store.
-	 * @param food Number of food to be distributed.
 	 * @param carLoadingStat Car loading duration statistics.
 	 * @param carRideStat Car ride duration statistics.
 	 * @param carRideDistanceStat Car ride distance statistics.
@@ -39,7 +38,6 @@ public:
 	 */
 	Car(
 		Store *cars,
-		unsigned long *food,
 		Stat *carLoadingStat,
 		Stat *carRideStat,
 		Stat *carRideDistanceStat,
@@ -74,11 +72,6 @@ private:
 	 * Car store.
 	 */
 	Store *cars;
-
-	/**
-	 * Number of food to be distributed.
-	 */
-	unsigned long *food;
 
 	/**
 	 * Car loading duration statistics.
