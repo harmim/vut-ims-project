@@ -11,6 +11,9 @@
 \usepackage{times}
 \usepackage{graphicx}
 \usepackage[unicode]{hyperref}
+\usepackage[czech, boxed]{algorithm2e}
+
+
 \hypersetup{
 	colorlinks = true,
 	hypertexnames = false,
@@ -153,101 +156,196 @@
 	nástroje\footnote{\url{http://www.fit.vutbr.cz/~peringer/SIMLIB}}.
 	Použili jsme nejnovější dostupnou verzi (ke dni \today), tj 3.07.
 	Autory tohoto nástroje jsou Petr Peringer, David Leska a David Martinek,
-	viz \cite{SIMLIB}. Pro účely vytvoření našeho simulačního modelu jsme
-	používali standardní nástroje a~rohraní této knihovny.
+	viz \cite{SIMLIB}. Pro účely vytvoření našeho simulačního modelu
+	\cite[snímek 44]{IMS_slides} jsme používali standardní nástroje
+	a~rohraní této knihovny.
 
 
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Koncepce modelu %%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Koncepce modelu}
 
-	V~této sekci se zpracovává návrh konceptuálního modelu[snímek 48]\cite{IMS_slides} nad
-	systémem, který je brán ze své podstaty jako systém hromadné obsluhy[snímek 136]\cite{IMS_slides}. Při vytváření
-	je potřeba vybrat ze všech údajů ty podstatné informace pro model. Z~rozboru tématu 
-	plyne, že je důležité namodelovat všecho, co souvisí se samotným rozvozem. Díky 
-	skutečnosti, že všechny jednotlivé údaje jsou zprůměrovány, je zapotřebí simulovat průběh
-	jednoho dne, přičemž se samozřejmě může den ode dne nepatrně lišit.	Na oba proměnné 
-	časové údaje při modelování se tedy použije rovnoměrné rozdělení[snímek 89]\cite{IMS_slides}
-	s~vyhovující odchylkou. Aby se model zjednodušil, průměrný počet jídel, který se 
-	každý den rozváží, se zaokrouhlí, aby byl dělitelný maximální kapacitou aut. Na 
-	validitu to má nepatrný	vliv až zanedbatelný jelikož jsou údaje zprůměrovány. Dále 
-	značka auta, spotřeba paliva a~cena nejsou pro model důležitá, tyto informace budou 
-	použity při	zefektivňování systému. Přesto, že tato situace reálně často, díky již 
-	nabraným zkušenostem z reality, nenastává, pro lepší experimentování je přidán druhý 
-	koncový stav, který znamená, že směna skončí dříve než jsou rozvezena všechna jídla, 
-	tedy nějaká	jídla zbydou na skladě. Tento stav značí neúspěšné dokončení směny, protože 
-	se nestihlo rozvést všechno jídlo v časovém limitu. Předpokládá se také, že auto, které 
-	započne ještě během pracovní směny svůj cyklus, ho celý dokončí. Ovšem pokud mezitím 
-	skončila směna, znamená to, že byl rozvoz neúspěšný z časového hlediska.
+	V~této sekci se zpracovává návrh konceptuálního (abstraktního) modelu
+	\cite[snímek 48]{IMS_slides} nad systémem, který je brán ze své podstaty
+	jako systém hromadné obsluhy \cite[snímek 136]{IMS_slides}. Při vytváření
+	je potřeba vybrat ze všech údajů ty podstatné informace pro model.
+	Z~rozboru tématu plyne, že je důležité namodelovat všecho, co souvisí se
+	samotným rozvozem. Díky skutečnosti, že všechny jednotlivé údaje jsou
+	zprůměrovány, je zapotřebí simulovat průběh jednoho dne, přičemž se
+	samozřejmě může den ode dne nepatrně lišit.	Na oba proměnné časové údaje
+	při modelování se tedy použije rovnoměrné rozdělení
+	\cite[snímek 89]{IMS_slides} s~vyhovující odchylkou. Aby se model
+	zjednodušil, průměrný počet jídel, který se každý den rozváží, se
+	zaokrouhlí, aby byl dělitelný maximální kapacitou aut. Na validitu to má
+	nepatrný vliv, až zanedbatelný, jelikož jsou údaje zprůměrovány. Dále
+	značka auta, spotřeba paliva a~cena nejsou pro model důležitá, tyto
+	informace budou použity při zefektivňování systému. Přesto, že tato
+	situace reálně často, díky již nabraným zkušenostem z~reality, nenastává,
+	pro lepší experimentování je přidán druhý koncový stav, který znamená,
+	že směna skončí dříve než jsou rozvezena všechna jídla, tedy nějaká
+	jídla zbydou na skladě. Tento stav značí neúspěšné dokončení směny,
+	protože se nestihlo rozvést všechno jídlo v časovém limitu. Předpokládá se
+	také, že auto, které započne ještě během pracovní směny svůj cyklus, ho
+	celý dokončí. Ovšem pokud mezitím skončila směna, znamená to, že byl
+	rozvoz neúspěšný z~časového hlediska.
 
 
 	\subsection{Popis konceptuálního modelu}
+	\label{section:conceptual_model_desc}
 
-	Model se skládá ze~dvou hlavních větví. První značí samotný průběh
-	rozvozu jídel a~druhá časovač. Druhá z~větví jen určuje, jak dlouho
-	probíhá pracovní směna, to je 6 hodin, a~jakmile směna skončí, skončí
-	rozvoz jídel. První větev má dvě vstupní proměnné - počet aut a~počet
-	jídel. Auto zde slouží jako obslužná linka, kde pokud je některé volné
-	a~připravené na rozvoz a~zároveň jsou ještě nějaká jídla na skladě,
-	začnou se nakládat. Pokud je však některé z~aut připraveno na rozvoz,
-	ale již byla všechna jídla rozvezena, skončí pracovní směna. Po
-	naložení jídel se auto vydá na cestu a všechna jídla rozveze. Po ukončení
-	této činnosti je auto zase volné a~připraveno k dalšímu použití.
+	Model, viz příloha \ref{appendix:petri_net}, se skládá ze~dvou hlavních
+	větví. První značí samotný průběh rozvozu jídel a~druhá časovač. Druhá
+	z~větví jen určuje, jak dlouho probíhá pracovní směna, to je 6 hodin,
+	a~jakmile směna skončí, skončí rozvoz jídel. První větev má dvě vstupní
+	proměnné -- počet aut a~počet jídel. Auto zde slouží jako obslužná linka,
+	kde pokud je některé volné a~připravené na rozvoz a~zároveň jsou ještě
+	nějaká jídla na skladě, začnou se nakládat. Pokud ale již byla všechna
+	jídla rozvezena a~všechna auta jsou připravena na rozvoz, skončí pracovní
+	směna. Po naložení jídel se auto vydá na cestu a~všechna jídla rozveze.
+	Po ukončení této činnosti je auto zase volné a~připraveno k~dalšímu použití.
 
 
 	\subsection{Forma konceptuálního modelu}
 
 	Model je vizualizován pomocí Petriho sítě v~příloze
-	\ref{appendix:petri_net} a doplněn informacemi a legendou.
+	\ref{appendix:petri_net} a~doplněn informacemi a~legendou.
 
 
 
 	%%%%%%%%%%%%%%%%%%% Architektura simulačního modelu %%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Architektura simulačního modelu}
 
+	Při spuštění simulačního modelu \cite[snímek 44]{IMS_slides} se spustí
+	jednotlivé simulační experimenty, jeden po druhém, viz kapitola
+	\ref{sectiion:experiments}. Simulační model je možné, po jeho přeložení
+	příkazem \texttt{make}, spustit příkazem \texttt{make run}. Po dokončení
+	běhu simulace se na standardní výstup vypíší informace o~provedených
+	experimentech. Před začátkem každého z~experimentů se vypíše modelový
+	čas \cite[snímek 21]{IMS_slides} začátku experimentu, počet dostupných
+	aut pro rozvážení jídla a~počet jídla, které je potřeba rozvézst. Na
+	konci každého z~experimentů se vypíše modelový čas konce experimentu,
+	počet jídel, které se nestihly rozvést, celková auty ujetá vzdálenost,
+	celková spotřeba pohonných hmot všech aut, informace o~skladu
+	\cite[snímek 184]{IMS_slides} aut a~statistiky ohledně času nakládání aut,
+	době trvání rozvozu jídel, ujeté vzdálenosti a~spotřebě aut.
+
+	Před spuštěním každého z~experimentů se inicializuje modelový čas tak, aby
+	doba trvání experimentu odpovídala jednomu dni v~reálném čase
+	\cite[snímek 21]{IMS_slides}, protože modelujeme jeden den rozvozu jídla.
+	Jedna časová jednotka modelového času odpovídá jedné minutě v~reálném
+	čase.
+
+	Spuštění experimentu v~simulačním modelu znamená vytvořit a~aktivovat
+	proces \cite[snímek 121]{IMS_slides}, který reprezentuje pracovní směnu
+	a~následně spustit samotnou simulaci. Tento proces reprezentující
+	pracovní směnu lze vytvořit s~parametry, které mění chování simulace.
+	Tyto parametry jsou měněny při spouštění jednotlivých experimentů. Jedná
+	se o~parametr značící počet aut pro rozvoz jídel, samotný počet jídel
+	a~odchylku o~této hodnoty.
+
+	Na algoritmu \ref{algorithm:workshift} je znázorněno chování procesu
+	pracovní směny a~na algoritmu \ref{algorithm:car} je znázorněno chování
+	procesu auta.\\
+
+	\begin{algorithm}[H]
+		\caption{Chování procesu pracovní směny}
+		\label{algorithm:workshift}
+		\SetKw{Break}{break}
+
+		vytvoření události reprezentující časovač, který po určité době
+		ukoční směnu\;
+		\While{jsou na skladě jídla připravena k rozvozu}
+		{
+			čekání na volné auto a~jeho zabrání\;
+			\eIf{na skladě už nejsou žádná jídla}
+			{
+				vrácení auta do skladu aut\;
+				\Break\;
+			}
+			{
+				odebrání jídel ze skladu, které budou naloženy do auta\;
+				vytvoření a~aktivavce procesu auta\;
+			}
+		}
+		čekání, až budou všechna auta ve skladu\;
+		ukončení směny\;
+	\end{algorithm}
+
+	\begin{algorithm}[H]
+		\caption{Chování procesu auta}
+		\label{algorithm:car}
+
+		čekání na naložení auta\;
+		čekání na rozvezení všech jídel\;
+		vrácení auta do skladu aut\;
+	\end{algorithm}
+
 
 	\subsection{Mapování konceptuálního modulu do simulačního modelu}
+
+	Jak je popsáno v~kapitole \ref{section:conceptual_model_desc}
+	a~znázorněno v~Petriho síťi v příloze \ref{appendix:petri_net}, časovač,
+	který ukončí směnu po uplynutí konce směny, je v simulačním modelu
+	implementován jako událost \cite[snímek 169]{IMS_slides}, která
+	při jejím vytvoření naplánuje sama sebe na čas, kdy má pracovní směna
+	skončit. V~popisu chování této události je potom implementováno
+	ukončení procesu pracovní směny. Této události v~simulačním modelu
+	odpovídá třída \texttt{WorkShiftTimer}.
+
+	Pracovní směna je v~simulačním modelu implementována jako proces, který
+	při svém vytvoření vytvoří a~inicializuje sklad
+	\cite[snímek 184]{IMS_slides} aut a~sdílenou proměnnou, která reprezentuje
+	momentální počet jídel pro rozvoz. Chování tohoto procesu
+	je znázorněno algoritmem \ref{algorithm:workshift}. Tomuto procesu
+	v~simulačním modelu odpovídá třída \texttt{WorkShift}.
+
+	Rozvoz jídla auty je v~simulačním modelu implementováno procesem, jehož
+	chování je znázorněno na algoritmu \ref{algorithm:car}. Tomuto process
+	v~simulačním moodelu odpovídá třída \texttt{Car}.
 
 
 
 	%%%%%%%%%%%%%%% Podstata simulačních experimentů a jejich průběh %%%%%%%%%%%
 	\section{Podstata simulačních experimentů a~jejich průběh}
 
-	Cílem experimentů bylo nejdříve ověřit validitu modelu, případně zpětně 
+	Cílem experimentů bylo nejdříve ověřit validitu modelu, případně zpětně
 	upravit vstupní průměrné hodnoty, aby byl model co nejpodobnější skutečnosti.
-	Další podstatou experimentů bylo demonstrovat, jak je systém efektivní, 
-	zjistit jeho limity a pokusit se o optimalizaci. Pomocí posledního 
-	experimentu se zjišťovalo, jestli je možné bez ohledu na režii systém 
+	Další podstatou experimentů bylo demonstrovat, jak je systém efektivní,
+	zjistit jeho limity a pokusit se o optimalizaci. Pomocí posledního
+	experimentu se zjišťovalo, jestli je možné bez ohledu na režii systém
 	rozšířit a urychlit pracovní směnu.
+
 
 	\subsection{Postup experimentování}
 
-	Každý experiment spočíval ve spuštění simulace 5krát po sobě v cyklu se 
-	zvolenými hodnotami. Všechny podstatné výstupní údaje se poté vložily do 
-	tabulky a zprůměrovaly. V každém experimentu také probíhala kontrola 
+	Každý experiment spočíval ve spuštění simulace 5krát po sobě v cyklu se
+	zvolenými hodnotami. Všechny podstatné výstupní údaje se poté vložily do
+	tabulky a zprůměrovaly. V každém experimentu také probíhala kontrola
 	úspěšnosti, tedy zda se stihlo rozvést všechno jídlo během směny. Pokud
 	směna skončila v momentě, kdy bylo alespoň 1 auto na cestě, experiment se
-	označil za neúspěch. Pokud není stoprocentní úspěšnost, nelze počítat, 
+	označil za neúspěch. Pokud není stoprocentní úspěšnost, nelze počítat,
 	že je experiment validní a celý se považuje za neúspěšný. Nakonec se z
 	výsledků učiní závěr a pokud nebyl experiment úspěšný, jsou na základě
 	těchto dat zvoleny nové vstupní hodnoty pro další experiment.
-
 
 	\begin{enumerate}
 		\item Určení vstupních hodnot, podle zadání experimentu.
 
 		\item Spuštění simulace.
 
-		\item Vypsání výstupů do tabulky. 
+		\item Vypsání výstupů do tabulky.
 
 		\item Zprůměrování výsledku, zhodnocení a učinění závěru.
 
 	\end{enumerate}
+
+
 	\subsection{Experimenty}
+	\label{sectiion:experiments}
 
 	\subsubsection{Experiment 1}
 
-	První experiment má za úkol ověřit validitu modelu. Používá reálné hodnoty, 
+	První experiment má za úkol ověřit validitu modelu. Používá reálné hodnoty,
 	které byly získány při zjišťování informací. Průměrný počet jídel je tedy
 	21200 a počet aut 16. Spuštěn byl jen jednou.
 
@@ -267,9 +365,9 @@
 	\subsubsection{Experiment 2}
 
 	Cílem druhého experimentu bylo zjistit limity systému ve smyslu, kolik
-	jídel je za aktuálních podmínek firma schopná rozvézt za jednu směnu. 
+	jídel je za aktuálních podmínek firma schopná rozvézt za jednu směnu.
 	Vstupní hodnota "počet jídel" byla tedy při každém novém experimentu
-	zvýšena o určitou hodnotu. 
+	zvýšena o určitou hodnotu.
 
 	\begin{table}[h!]
 		\centering
@@ -284,15 +382,15 @@
 	\end{table}
 
 	Při použití průmerného počtu jídel 23000 byla úspěšnost rozvozu ještě
-	stoprocentní, ale při zvýšení této hodnoty o dalších 1200 už z 80\% 
+	stoprocentní, ale při zvýšení této hodnoty o dalších 1200 už z 80\%
 	pokusů doba směny dosáhla na hodnotu 6 hodin a některá auta stále ještě
 	rozvážela. Z experimentů vyplynulo, že při překročení hranice 24000 jídel
 	nebylo téměř možné stihnout rovoz v časovém intervalu.
 
 	\subsubsection{Experiment 3}
 
-	V tomto experimentu je záměr zjistit díky změně počtu aut, zda se nedá 
-	snížit spotřeba paliva a tím snížit režii. Postupným odebíráním nebo 
+	V tomto experimentu je záměr zjistit díky změně počtu aut, zda se nedá
+	snížit spotřeba paliva a tím snížit režii. Postupným odebíráním nebo
 	přidáváním rozvážejících aut se bude ujetá vzálenost a spotřeba měnit.
 
 	\begin{table}[h!]
@@ -309,7 +407,7 @@
 		\end{tabular}
 	\end{table}
 
-	Tento experiment vrací neočekávané výsledky. Při změně počtu aut, pokud je 
+	Tento experiment vrací neočekávané výsledky. Při změně počtu aut, pokud je
 	úspěšnost storprocentní, se vzdálenost a tedy i spotřeba liší jen nepatrně.
 	Je zřejmé, že čím více by se udělalo pokusů, tím více by si byly hodnoty podobné.
 	Lze tedy usoudit, že spotřeba není závislá na počtu aut, ale spíše na počtu
@@ -333,8 +431,8 @@
 		\end{tabular}
 	\end{table}
 
-	Už po dvou experimentech se podařilo dosáhnout stoprocentní úspěšnosti. Při 
-	40 autech byly nějaké pokusy neúspěšné, ale při 42 autech se stihla všechna 
+	Už po dvou experimentech se podařilo dosáhnout stoprocentní úspěšnosti. Při
+	40 autech byly nějaké pokusy neúspěšné, ale při 42 autech se stihla všechna
 	jídla rozvézt průměrně za 3 hodiny a 50 minut, což je dokonce o hodinu rychleji
 	než bylo požadováno.
 
@@ -346,6 +444,8 @@
 	několik užitečných informací. Experimenty lze považovat s dostatečnou věrohodností za
 	správný zdroj informací, neboť se každý experiment skládal z několika pokusů, z nichž
 	byly všechny výsledky ještě zprůměrovány.
+
+
 
 	%%%%%%%%%%%%%%%%% Shrnutí simulačních experimentů a závěr %%%%%%%%%%%%%%%%%%
 	\section{Shrnutí simulačních experimentů a~závěr}
