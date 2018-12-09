@@ -29,19 +29,19 @@ Car::Car(
 
 void Car::Behavior()
 {
-	double carLoadingDuration = AverageUniformDistribution::generate(
+	double carLoadingDuration = AverageUniformDistribution::Generate(
 		CAR_LOADING_DURATION_AVERAGE, CAR_LOADING_DURATION_DEVIATION
 	);
 	(*carLoadingStat)(carLoadingDuration);
 	Wait(carLoadingDuration);
 
-	double carRideDuration = AverageUniformDistribution::generate(
+	double carRideDuration = AverageUniformDistribution::Generate(
 		CAR_RIDE_DURATION_AVERAGE, CAR_RIDE_DURATION_DEVIATION
 	);
 	(*carRideStat)(carRideDuration);
 	Wait(carRideDuration);
 
-	double carRideDistance = AverageUniformDistribution::generate(
+	double carRideDistance = AverageUniformDistribution::Generate(
 		CAR_RIDE_DISTANCE_AVERAGE, CAR_RIDE_DISTANCE_DEVIATION
 	);
 	(*carRideDistanceStat)(carRideDistance);

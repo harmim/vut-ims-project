@@ -7,8 +7,11 @@
  */
 
 
-#include <cstdio>
+#include <iostream>
 #include "WorkShiftTimer.hpp"
+
+
+using namespace std;
 
 
 WorkShiftTimer::WorkShiftTimer(WorkShift *workShift) : workShift(workShift)
@@ -19,13 +22,13 @@ WorkShiftTimer::WorkShiftTimer(WorkShift *workShift) : workShift(workShift)
 
 void WorkShiftTimer::Behavior()
 {
-	printEndOfShift();
+	PrintEndOfShift();
 
 	delete workShift;
 }
 
 
-void WorkShiftTimer::printEndOfShift()
+void WorkShiftTimer::PrintEndOfShift()
 {
-	printf("End of work shift because timer elapsed.\n");
+	cout << "End of work shift because timer elapsed.\n\n";
 }

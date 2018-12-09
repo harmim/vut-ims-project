@@ -23,7 +23,7 @@ public:
 	 * @param deviation Deviation from average value in percentage.
 	 * @return Generated value.
 	 */
-	static double generate(double average, double deviation);
+	static double Generate(double average, double deviation);
 };
 
 

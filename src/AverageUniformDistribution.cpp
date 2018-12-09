@@ -11,7 +11,7 @@
 #include "AverageUniformDistribution.hpp"
 
 
-double AverageUniformDistribution::generate(double average, double deviation)
+double AverageUniformDistribution::Generate(double average, double deviation)
 {
 	double deviationValue = deviation / 100.0 * average;
 	return Uniform(average - deviationValue, average + deviationValue);

@@ -5,7 +5,7 @@ BUILD_DIR := cmake-build-release
 PACK := 02_xharmi00_xhertl04
 DOC_DIR := doc
 SRC_DIR := src
-DOC = documentation.pdf
+DOC := documentation.pdf
 
 
 .PHONY: build
@@ -20,7 +20,7 @@ $(EXECUTABLE):
 
 .PHONY: run
 run:
-	./$(BUILD_DIR)/$(EXECUTABLE)
+	./$(BUILD_DIR)/$(EXECUTABLE) $(ARGS)
 
 
 .PHONY: pack

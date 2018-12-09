@@ -7,11 +7,14 @@
  */
 
 
-#include <cstdio>
+#include <iostream>
 #include "WorkShift.hpp"
 #include "WorkShiftTimer.hpp"
 #include "Car.hpp"
 #include "AverageUniformDistribution.hpp"
+
+
+using namespace std;
 
 
 WorkShift::WorkShift(
@@ -22,7 +25,7 @@ WorkShift::WorkShift(
 
 	// Round number of food to be divisible by car capacity.
 	food = new unsigned long(static_cast<unsigned long>(
-		AverageUniformDistribution::generate(foodAverage, foodDeviation)
+		AverageUniformDistribution::Generate(foodAverage, foodDeviation)
 	));
 	unsigned long remainder = *food % Car::CAR_CAPACITY;
 	if (remainder < Car::CAR_CAPACITY / 2.0)
@@ -39,13 +42,13 @@ WorkShift::WorkShift(
 	carRideDistanceStat = new Stat("Car ride distance");
 	carRideConsumptionStat = new Stat("Car ride consumption");
 
-	printStartOfShift();
+	PrintStartOfShift();
 }
 
 
 WorkShift::~WorkShift()
 {
-	printEndOfShift();
+	PrintEndOfShift();
 
 	delete food;
 	delete carLoadingStat;
@@ -92,32 +95,33 @@ void WorkShift::Behavior()
 }
 
 
-void WorkShift::printStartOfShift()
+void WorkShift::PrintStartOfShift()
 {
-	printf("////////////////////////////////////////////////////////////\n\n");
-	printf("Work shift started.\n");
-	printf("\tStart time: %g.\n", Time);
-	printf("\tNumber of cars: %lu.\n", cars->Capacity());
-	printf("\tNumber of food: %lu.\n", *food);
-	printf("\n");
+	cout << "////////////////////////////////////////////////////////////\n"
+		<< "Work shift started.\n"
+		<< "\tStart time: " << Time << ".\n"
+		<< "\tNumber of cars: " << cars->Capacity() << ".\n"
+		<< "\tNumber of food: " << *food << ".\n"
+		<< endl;
 }
 
 
-void WorkShift::printEndOfShift()
+void WorkShift::PrintEndOfShift()
 {
-	printf("End of work shift.\n");
-	printf("\tEnd time: %g.\n", Time);
-	printf("\tNumber of food left: %lu.\n", *food);
-	printf("\tTotal car ride distance: %g.\n", carRideDistanceStat->Sum());
-	printf(
-		"\tTotal cars consumption: %g.\n",
-		carRideDistanceStat->Sum() / 100.0 * Car::CAR_CONSUMPTION
-	);
-	printf("\n");
+	cout << "End of work shift.\n"
+		<< "\tEnd time: " << Time << ".\n"
+		<< "\tNumber of food left: " << *food << ".\n"
+		<< "\tTotal car ride distance: " << carRideDistanceStat->Sum() << ".\n"
+		<< "\tTotal cars consumption: "
+			<< carRideDistanceStat->Sum() / 100.0 * Car::CAR_CONSUMPTION
+			<< ".\n"
+		<< endl;
+
 	cars->Output();
 	carLoadingStat->Output();
 	carRideStat->Output();
 	carRideDistanceStat->Output();
 	carRideConsumptionStat->Output();
-	printf("////////////////////////////////////////////////////////////\n");
+
+	cout << "////////////////////////////////////////////////////////////\n";
 }
