@@ -10,22 +10,17 @@
 \usepackage[left=2cm, top=3cm, text={17cm, 24cm}]{geometry}
 \usepackage{times}
 \usepackage{graphicx}
-\usepackage[unicode]{hyperref}
+\usepackage[hyphens]{url}
+\usepackage[unicode, colorlinks, hypertexnames=false, citecolor=red]{hyperref}
 \usepackage[czech, boxed]{algorithm2e}
-
-
-\hypersetup{
-	colorlinks = true,
-	hypertexnames = false,
-	citecolor = red
-}
+\usepackage[perpage]{footmisc}
 
 
 \begin{document}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Titulní stránka %%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{titlepage}
 		\begin{center}
-			\includegraphics[width=0.77\linewidth]{inc/FIT_logo.pdf} \\
+			\includegraphics[width=0.77 \linewidth]{inc/FIT_logo.pdf}
 
 			\vspace{\stretch{0.382}}
 
@@ -38,14 +33,15 @@
 		\end{center}
 
 		\begin{minipage}{0.5 \textwidth}
-			{\Large \today}
+			\Large
+			\today
 		\end{minipage}
 		\hfill
 		\begin{minipage}[r]{0.5 \textwidth}
 			\Large
-			\begin{tabular}{l l}
+			\begin{tabular}{ll}
 				\textbf{Dominik Harmim} & \textbf{(xharmi00)} \\
-				Vojtěch Hertl & (xhertl04) \\
+				Vojtěch Hertl & (xhertl04)
 			\end{tabular}
 		\end{minipage}
 	\end{titlepage}
@@ -53,14 +49,15 @@
 
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Obsah %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\clearpage
 	\pagenumbering{roman}
 	\setcounter{page}{1}
 	\tableofcontents
-	\clearpage
 
 
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Úvod %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\clearpage
 	\pagenumbering{arabic}
 	\setcounter{page}{1}
 
@@ -86,7 +83,7 @@
 
 	K~technické části této práce bylo využito zdrojů z~kursu Modelování
 	a~simulace na FIT VUT v~Brně. Jako zdroj k~faktům sloužily webové stránky
-	firmy Freshbox a~také vedoucí této firmy, Mgr. Silvie Obadalová\\
+	firmy Freshbox a~také vedoucí této firmy, Mgr. Silvie Obadalová \\
 	(\texttt{obadalova@freshbox.cz}).
 
 
@@ -110,19 +107,21 @@
 	každý den od 6:30 hodin do 12:30 hodin (tj. 6 hodin) rozváží zákazníkům po
 	Brně a~okolí. Firma Freshbox rozváží jidlo 16 auty, přičemž jedno auto
 	je schopné naložit maximálně 500 jídel. Každý den se rozváží
-	průměrně 21\,200 jídel $\pm$~1\,000 jídel. Firma má na začátku rozvozu
+	průměrně 21\,200 jídel $\pm$\,1\,000 jídel. Firma má na začátku rozvozu
 	již všechna jídla připravena a~v~6:30 hodin se připraví všechna auta,
 	do kterých se naloží maximální počet jídel, který je dán maximální
 	kapacitou auta. Naložení jednoho auta průměrně trvá 11 minut
-	$\pm$~3 minuty. Rozvoz všech jídel jednoho auta trvá průměrně 97 minut
-	$\pm$~12 minut. Při tomto rozvozu každé auto urazí průměrně 43 km
-	$\pm$ 8 km. Pro rozvoz se požívají auta Volkswagen Caddy 1.9 TDI.
-	Tato auta mají spotřebu
-	7,7\,l/100\,km\footnote{\url{https://www.auto-data.net/en/volkswagen-caddy-maxi-life-typ-2k-1.9-tdi-105hp-8855}}
-	nafty při městském provozu. Když auto rozveze všechna
-	naložená jídla, vrátí se na pobočku Freshbox, aby se mohla naložit další
-	jídla. Samotné nakládání jídel provádí sám řadič daného auta. Tento proces
-	se opakuje tak dlouho, dokud nejsou rozvezena všechna jídla. Jeden zákazník
+	$\pm$\,3 minuty. Rozvoz všech jídel jednoho auta trvá průměrně 97 minut
+	$\pm$\,12 minut. Při tomto rozvozu každé auto urazí průměrně 43 km
+	$\pm$\,8\,km. Pro rozvoz se požívají auta Volkswagen Caddy 1.9 TDI.
+	Tato auta mají spotřebu 7,7 l/100\,km\footnote{
+		\url{https://www.auto-data.net/en/
+			volkswagen-caddy-maxi-life-typ-2k-1.9-tdi-105hp-8855
+		}
+	} nafty při městském provozu. Když auto rozveze všechna naložená jídla,
+	vrátí se na pobočku Freshbox, aby se mohla naložit další jídla. Samotné
+	nakládání jídel provádí sám řadič daného auta. Tento proces se opakuje
+	tak dlouho, dokud nejsou rozvezena všechna jídla. Jeden zákazník
 	(právnická nebo fyzická osoba) si samozřejmě může objednat více jídel na
 	jedno místo doručení, což se typicky děje, protože pravidelnými zákazníky
 	jsou firmy, které si objednávají denně řádově desítky jídel.
@@ -245,11 +244,9 @@
 
 	Na algoritmu \ref{algorithm:workshift} je znázorněno chování procesu
 	pracovní směny a~na algoritmu \ref{algorithm:car} je znázorněno chování
-	procesu auta.\\
+	procesu auta. \\
 
-	\begin{algorithm}[H]
-		\caption{Chování procesu pracovní směny}
-		\label{algorithm:workshift}
+	\begin{algorithm}[ht]
 		\SetKw{Break}{break}
 
 		vytvoření události reprezentující časovač, který po určité době
@@ -269,15 +266,18 @@
 		}
 		čekání, až budou všechna auta ve skladu\;
 		ukončení směny\;
+
+		\caption{Chování procesu pracovní směny}
+		\label{algorithm:workshift}
 	\end{algorithm}
 
-	\begin{algorithm}[H]
-		\caption{Chování procesu auta}
-		\label{algorithm:car}
-
+	\begin{algorithm}[ht]
 		čekání na naložení auta\;
 		čekání na rozvezení všech jídel\;
 		vrácení auta do skladu aut\;
+
+		\caption{Chování procesu auta}
+		\label{algorithm:car}
 	\end{algorithm}
 
 
@@ -309,140 +309,188 @@
 	\section{Podstata simulačních experimentů a~jejich průběh}
 
 	Cílem experimentů bylo nejdříve ověřit validitu modelu, případně zpětně
-	upravit vstupní průměrné hodnoty, aby byl model co nejpodobnější skutečnosti.
-	Další podstatou experimentů bylo demonstrovat, jak je systém efektivní,
-	zjistit jeho limity a pokusit se o optimalizaci. Pomocí posledního
-	experimentu se zjišťovalo, jestli je možné bez ohledu na režii systém
-	rozšířit a urychlit pracovní směnu.
+	upravit vstupní průměrné hodnoty, aby byl model co nejpodobnější
+	skutečnosti. Další podstatou experimentů bylo demonstrovat, jak je
+	systém efektivní, zjistit jeho limity a~pokusit se o~optimalizaci.
+	Pomocí posledního experimentu se zjišťovalo, jestli je možné bez ohledu
+	na režii systém rozšířit a~urychlit pracovní směnu.
 
 
 	\subsection{Postup experimentování}
 
-	Každý experiment spočíval ve spuštění simulace 5krát po sobě v cyklu se
+	Každý experiment spočíval ve spuštění simulace 5krát po sobě v~cyklu se
 	zvolenými hodnotami. Všechny podstatné výstupní údaje se poté vložily do
-	tabulky a zprůměrovaly. V každém experimentu také probíhala kontrola
+	tabulky a~zprůměrovaly. V~každém experimentu také probíhala kontrola
 	úspěšnosti, tedy zda se stihlo rozvést všechno jídlo během směny. Pokud
-	směna skončila v momentě, kdy bylo alespoň 1 auto na cestě, experiment se
+	směna skončila v~momentě, kdy bylo alespoň 1 auto na cestě, experiment se
 	označil za neúspěch. Pokud není stoprocentní úspěšnost, nelze počítat,
-	že je experiment validní a celý se považuje za neúspěšný. Nakonec se z
-	výsledků učiní závěr a pokud nebyl experiment úspěšný, jsou na základě
-	těchto dat zvoleny nové vstupní hodnoty pro další experiment.
+	že je experiment validní a~celý se považuje za neúspěšný. Nakonec se
+	z~výsledků učiní závěr a~pokud nebyl experiment úspěšný, jsou na základě
+	těchto dat zvoleny nové vstupní hodnoty pro další experiment. \\
 
+	\textbf{Postup experimentování lze tedy shrnout následovně:}
 	\begin{enumerate}
 		\item Určení vstupních hodnot, podle zadání experimentu.
-
 		\item Spuštění simulace.
-
 		\item Vypsání výstupů do tabulky.
-
-		\item Zprůměrování výsledku, zhodnocení a učinění závěru.
-
+		\item Zprůměrování výsledků, zhodnocení a~učinění závěru.
 	\end{enumerate}
 
 
 	\subsection{Experimenty}
 	\label{sectiion:experiments}
 
+	U~jednotlivých experimentů je shrnut cíl a~smysl daného experimentu.
+	Každý experiment zahrnuje výpis jeho výsledků s~patřičným popisem
+	a~shrnutím závěru experimentu.
+
+
 	\subsubsection{Experiment 1}
 
-	První experiment má za úkol ověřit validitu modelu. Používá reálné hodnoty,
-	které byly získány při zjišťování informací. Průměrný počet jídel je tedy
-	21200 a počet aut 16. Spuštěn byl jen jednou.
+	První experiment, viz tabulka \ref{table:experiment1}, má za úkol ověřit
+	validitu modelu. Používá reálné hodnoty, které byly získány při zjišťování
+	informací. Průměrný počet jídel je tedy 21\,200 a~počet aut 16. Spuštěn
+	byl jen jednou.
 
-	\begin{table}[h!]
+	\begin{table}[ht]
 		\centering
 		\begin{tabular}{|r|r|r|r|r|r|}
 			\hline
-			\multicolumn{6}{|l|}{\textbf{Experiment 1}}   \\ \hline
-			 Počet jídel & Počet aut & Celkový čas & Ujetá vzdálenost [km] & Spotřeba [l] & \textbf{Úspěch} \\ \hline
-			 21400 & 16 & 5:36 & 1831 & 140,9 & \textbf{100\%} \\ \hline
+			Počet jídel & Počet aut & Celkový čas [h:m]
+				& Ujetá vzdálenost [km] & Spotřeba [l]
+				& \textbf{Úspěch} \\ \hline
+
+			21\,400 & 16 & 5:36 & 1\,831 & 140,9 & \textbf{100\,\%} \\ \hline
 		\end{tabular}
+
+		\caption{Experiment 1}
+		\label{table:experiment1}
 	\end{table}
 
-	Z tabulky je zřejmé, že je model validní. Celkový čas nedosahuje nikdy
-	6 hodin, rozvoz má dokonce průměrně 14 minut rezervu.
+	Z~tabulky \ref{table:experiment1} je zřejmé, že je model validní. Celkový
+	čas nedosahuje nikdy 6 hodin, rozvoz má dokonce průměrně 14 minut rezervu.
 
 	\subsubsection{Experiment 2}
 
-	Cílem druhého experimentu bylo zjistit limity systému ve smyslu, kolik
-	jídel je za aktuálních podmínek firma schopná rozvézt za jednu směnu.
-	Vstupní hodnota "počet jídel" byla tedy při každém novém experimentu
-	zvýšena o určitou hodnotu.
+	Cílem druhého experimentu, viz tabulka \ref{table:experiment2}, bylo
+	zjistit limity systému ve smyslu, kolik jídel je za aktuálních podmínek
+	firma schopná rozvézt za jednu směnu. Vstupní hodnota \uv{počet jídel}
+	byla tedy při každém novém experimentu zvýšena o~určitou hodnotu.
 
-	\begin{table}[h!]
+	\begin{table}[ht]
 		\centering
 		\begin{tabular}{|r|r|r|r|r|}
 			\hline
-			\multicolumn{5}{|l|}{\textbf{Experiment 2}}   \\ \hline
-			 Počet jídel & Počet aut & Celkový čas & \textbf{Úspěch} & \textbf{Průměrný počet jídel} \\ \hline
-			 21400 & 16 & 5:36 & \textbf{100\%} & \textbf{21200} \\ \hline
-			 23400 & 16 & 5:39 & \textbf{100\%} & \textbf{23000} \\ \hline
-			 24500 & 16 & 5:57 & \textbf{20\%}  & \textbf{24200} \\ \hline
+			Počet jídel & Počet aut & Celkový čas [h:m] & \textbf{Úspěch}
+				& \textbf{Průměrný počet jídel} \\ \hline
+
+			21\,400 & 16 & 5:36 & \textbf{100\,\%} & \textbf{21\,200} \\ \hline
+			23\,400 & 16 & 5:39 & \textbf{100\,\%} & \textbf{23\,000} \\ \hline
+			24\,500 & 16 & 5:57 & \textbf{20\,\%}  & \textbf{24\,200} \\ \hline
 		\end{tabular}
+
+		\caption{Experiment 2}
+		\label{table:experiment2}
 	\end{table}
 
-	Při použití průmerného počtu jídel 23000 byla úspěšnost rozvozu ještě
-	stoprocentní, ale při zvýšení této hodnoty o dalších 1200 už z 80\%
-	pokusů doba směny dosáhla na hodnotu 6 hodin a některá auta stále ještě
-	rozvážela. Z experimentů vyplynulo, že při překročení hranice 24000 jídel
-	nebylo téměř možné stihnout rovoz v časovém intervalu.
+	Při použití průmerného počtu jídel 23\,000 byla úspěšnost rozvozu ještě
+	stoprocentní, ale při zvýšení této hodnoty o~dalších 1\,200 už z~80\,\%
+	pokusů doba směny dosáhla na hodnotu 6 hodin a~některá auta stále ještě
+	rozvážela. Z~experimentů vyplynulo, že při překročení hranice 24\,000 jídel
+	nebylo téměř možné stihnout rovoz v~časovém intervalu.
 
 	\subsubsection{Experiment 3}
 
-	V tomto experimentu je záměr zjistit díky změně počtu aut, zda se nedá
-	snížit spotřeba paliva a tím snížit režii. Postupným odebíráním nebo
-	přidáváním rozvážejících aut se bude ujetá vzálenost a spotřeba měnit.
+	V~tomto experimentu, viz tabulka \ref{table:experiment3}, je záměr
+	zjistit díky změně počtu aut, zda se nedá snížit spotřeba paliva a~tím
+	snížit režii. Postupným odebíráním nebo přidáváním rozvážejících aut se
+	bude ujetá vzálenost a~spotřeba měnit.
 
-	\begin{table}[h!]
+	\begin{table}[ht]
 		\centering
 		\begin{tabular}{|r|r|r|r|r|r|}
 			\hline
-			\multicolumn{6}{|l|}{\textbf{Experiment 3}}   \\ \hline
-			 Počet jídel & \textbf{Počet aut} & Celkový čas & Ujetá vzdálenost [km] & \textbf{Spotřeba [l]} & \textbf{Úspěch} \\ \hline
-			 21400 & \textbf{16} & 5:36 & 1831 & \textbf{140,9} & \textbf{100\%} \\ \hline
-			 21400 & \textbf{15} & 5:44 & 1836 & \textbf{141,3} & \textbf{100\%} \\ \hline
-			 21400 & \textbf{14} & 5:57 & 1801 & \textbf{138,6} & \textbf{40\%}  \\ \hline
-			 21400 & \textbf{17} & 5:30 & 1839 & \textbf{141,6} & \textbf{100\%} \\ \hline
-			 21400 & \textbf{25} & 3:47 & 1837 & \textbf{141,4} & \textbf{100\%} \\ \hline
+			Počet jídel & \textbf{Počet aut} & Celkový čas [h:m]
+				& Ujetá vzdálenost [km] & \textbf{Spotřeba [l]}
+				& \textbf{Úspěch} \\ \hline
+
+			21\,400 & \textbf{16} & 5:36 & 1\,831 & \textbf{140,9}
+				& \textbf{100\,\%} \\ \hline
+
+			21\,400 & \textbf{15} & 5:44 & 1\,836 & \textbf{141,3}
+				& \textbf{100\,\%} \\ \hline
+
+			21\,400 & \textbf{14} & 5:57 & 1\,801 & \textbf{138,6}
+				& \textbf{40\,\%}  \\ \hline
+
+			21\,400 & \textbf{17} & 5:30 & 1\,839 & \textbf{141,6}
+				& \textbf{100\,\%} \\ \hline
+
+			21\,400 & \textbf{25} & 3:47 & 1\,837 & \textbf{141,4}
+				& \textbf{100\,\%} \\ \hline
 		\end{tabular}
+
+		\caption{Experiment 3}
+		\label{table:experiment3}
 	\end{table}
 
 	Tento experiment vrací neočekávané výsledky. Při změně počtu aut, pokud je
-	úspěšnost storprocentní, se vzdálenost a tedy i spotřeba liší jen nepatrně.
-	Je zřejmé, že čím více by se udělalo pokusů, tím více by si byly hodnoty podobné.
-	Lze tedy usoudit, že spotřeba není závislá na počtu aut, ale spíše na počtu
-	rozvážených jídel.
+	úspěšnost storprocentní, se vzdálenost a~tedy i~spotřeba liší jen nepatrně.
+	Je zřejmé, že čím více by se udělalo pokusů, tím více by si byly hodnoty
+	podobné. Lze tedy usoudit, že spotřeba není závislá na počtu aut, ale
+	spíše na počtu rozvážených jídel.
 
 	\subsubsection{Experiment 4}
 
-	Díky poslednímu experimentu je snaha dojít k závěru, jestli systém ustojí
-	i při větších číslech. Zvýšení počtu průměrně rozvážených jídel na 40000 a
-	zároveň požadavek zrychení rozvozu o hodinu, takže maximální přípustný čas
-	je 5 hodin. Proměná bude počet aut, nezáleží na ceně.
+	Díky poslednímu experimentu je snaha dojít k~závěru, jestli systém ustojí
+	i~při větších číslech. Zvýšení počtu průměrně rozvážených jídel na 40\,000
+	a~zároveň požadavek zrychení rozvozu o hodinu, takže maximální přípustný
+	čas je 5 hodin. Proměná bude počet aut, nezáleží na ceně.
 
-	\begin{table}[h!]
+	\begin{table}[ht]
 		\centering
 		\begin{tabular}{|r|r|r|r|r|r|}
 			\hline
-			\multicolumn{6}{|l|}{\textbf{Experiment 4}}   \\ \hline
-			 Počet jídel & \textbf{Počet aut} & \textbf{Celkový čas} & Ujetá vzdálenost [km] & Spotřeba [l] & \textbf{Úspěch (5h)} \\ \hline
-			 39700 & \textbf{40} & \textbf{4:34} & 3417 & 263,1 & \textbf{60\%}  \\ \hline
-			 39700 & \textbf{42} & \textbf{3:50} & 3397 & 262,2 & \textbf{100\%} \\ \hline
+			Počet jídel & \textbf{Počet aut} & \textbf{Celkový čas [h:m]}
+				& Ujetá vzdálenost [km] & Spotřeba [l]
+				& \textbf{Úspěch (5h)} \\ \hline
+
+			39\,700 & \textbf{40} & \textbf{4:34} & 3\,417 & 263,1
+				& \textbf{60\,\%} \\ \hline
+
+			39\,700 & \textbf{42} & \textbf{3:50} & 3\,397 & 262,2
+				& \textbf{100\,\%} \\ \hline
 		\end{tabular}
+
+		\caption{Experiment 4}
+		\label{table:experiment4}
 	\end{table}
 
 	Už po dvou experimentech se podařilo dosáhnout stoprocentní úspěšnosti. Při
 	40 autech byly nějaké pokusy neúspěšné, ale při 42 autech se stihla všechna
-	jídla rozvézt průměrně za 3 hodiny a 50 minut, což je dokonce o hodinu rychleji
-	než bylo požadováno.
+	jídla rozvézt průměrně za 3 hodiny a~50 minut, což je dokonce o~hodinu
+	rychleji než bylo požadováno.
 
 
 	\subsection{Závěry experimentů}
 
-	Bylo provedeno více než 9 experimentů v různých podmínkách. V průběhu experimentování
-	byla zjištěna validita původního modelu. Díky dalším experimentům se podařilo zjistit
-	několik užitečných informací. Experimenty lze považovat s dostatečnou věrohodností za
-	správný zdroj informací, neboť se každý experiment skládal z několika pokusů, z nichž
+	Bylo provedeno více než 9 experimentů v~různých podmínkách. V~průběhu
+	experimentování byla zjištěna validita původního modelu. Díky dalším
+	experimentům se podařilo zjistit několik užitečných informací, které
+	mohou být použity ke zkvalitnění systému. Některé z~experimentů ukázaly,
+	jaké jsou limitní hranice systému.
+
+	Bylo by možné provést další experimenty, kterými by se dalo zjistit,
+	jak by se systém choval, kdyby se měnila doba trvání pracovní doby.
+	Další užitečné informace by se daly získat z~provedení experimentů,
+	ve kterých by se změnil typ auta, které se používají pro rozvoj jídla,
+	tj. změnila by se maximální kapacita auta a~jeho spotřeba. V~tomto
+	případě by se ale musely nějakým vhodným způsobem spočítat a~nebo na
+	základě nějakých známých faktů odhadnout ostatní parametry systému, např.
+	doba nakládání auta nebo doba rozvozu jídel.
+
+	Experimenty lze považovat s~dostatečnou věrohodností za správný zdroj
+	informací, neboť se každý experiment skládal z~několika pokusů, z~nichž
 	byly všechny výsledky ještě zprůměrovány.
 
 
@@ -464,13 +512,14 @@
 	\clearpage
 	\appendix
 
+
 	\section{Petriho síť}
 	\label{appendix:petri_net}
-	\begin{figure}[!ht]
+
+	\begin{figure}[ht]
 		\centering
-		\vspace{-1.2cm}
-		\includegraphics[width=0.95\linewidth]{inc/petri_net.pdf}
+		\includegraphics[width=1 \linewidth]{inc/petri_net.pdf}
+
 		\caption{Petriho síť}
-		\label{figure:petri_net}
 	\end{figure}
 \end{document}
