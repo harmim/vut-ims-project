@@ -89,7 +89,7 @@
 
 	\subsection{Ověření validity}
 
-	Ověřování validity \cite[snímek 37]{Freshbox} probíhalo telefonicky
+	Ověřování validity \cite[snímek 37]{IMS_slides} probíhalo telefonicky
 	a~elektronicky s~vedoucí firmy Freshox, magistrou Obadalovou. Na základě
 	této komunikace byla získána všechna data potřebná k~experimentálnímu
 	ověřování validity modelu. Statistická data byla extrahována z~naměřených
@@ -107,17 +107,15 @@
 	každý den od 6:30 hodin do 12:30 hodin (tj. 6 hodin) rozváží zákazníkům po
 	Brně a~okolí. Firma Freshbox rozváží jidlo 16 auty, přičemž jedno auto
 	je schopno pojmout maximálně 500 jídel. Každý den se rozváží
-	průměrně 21\,200 jídel $\pm$\,1\,000 jídel včetně polévek, salátů a dezertů. Firma má na začátku rozvozu
-	již všechna jídla připravena a~v~6:30 hodin se připraví všechna auta,
-	do kterých se naloží maximální počet jídel, který je dán maximální
-	kapacitou auta. Naložení jednoho auta průměrně trvá 11 minut
-	$\pm$\,3 minuty. Rozvoz všech jídel jednoho auta trvá průměrně 97 minut
-	$\pm$\,12 minut. Při tomto rozvozu každé auto urazí průměrně 43 km
-	$\pm$\,8\,km. Pro rozvoz se požívají auta Volkswagen Caddy 1.9 TDI.
-	Tato auta mají spotřebu 7,7 l/100\,km\footnote{
-		\url{https://www.auto-data.net/en/
-			volkswagen-caddy-maxi-life-typ-2k-1.9-tdi-105hp-8855
-		}
+	průměrně 21\,200 jídel $\pm$\,1\,000 jídel včetně polévek, salátů
+	a~dezertů. Firma má na začátku rozvozu již všechna jídla připravena
+	a~v~6:30 hodin se připraví všechna auta, do kterých se naloží maximální
+	počet jídel, který je dán maximální kapacitou auta. Naložení jednoho auta
+	průměrně trvá 11 minut $\pm$\,3 minuty. Rozvoz všech jídel jednoho auta
+	trvá průměrně 97 minut $\pm$\,12 minut. Při tomto rozvozu každé auto urazí
+	průměrně 43\,km $\pm$\,8\,km. Pro rozvoz se požívají auta Volkswagen Caddy
+	1.9 TDI. Tato auta mají spotřebu 7,7 l/100\,km\footnote{
+		\url{https://www.auto-data.net/en/volkswagen-caddy-maxi-life-typ-2k-1.9-tdi-105hp-8855}
 	} nafty při městském provozu. Když auto rozveze všechna naložená jídla,
 	vrátí se na pobočku Freshbox, aby se mohla naložit další jídla. Samotné
 	nakládání jídel provádí sám řidič daného auta. Tento proces se opakuje
@@ -145,15 +143,13 @@
 	Byly použity standardní třídy a~funkce jazyka
 	C++\footnote{\url{https://cppreference.com/w/cpp}}, přičemž
 	byl dodržen standard C++14. Využívá se také monžosti oběktově
-	orientovaného návrhu.
-
-	Pro překlad zdrojových souborů byly použity nástroje
+	orientovaného návrhu. Pro překlad zdrojových souborů byly použity nástroje
 	CMake\footnote{\url{https://cmake.org}}
 	a~GNU Make\footnote{\url{https://www.gnu.org/software/make}}.
 
 	Knihovna SIMLIB byla získána z~oficálních stránek tohoto
 	nástroje\footnote{\url{http://www.fit.vutbr.cz/~peringer/SIMLIB}}.
-	Použila byla nejnovější dostupná verze (ke dni \today), tj 3.07.
+	Použita byla nejnovější dostupná verze (ke dni \today), tj 3.07.
 	Autory tohoto nástroje jsou Petr Peringer, David Leska a~David Martinek,
 	viz \cite{SIMLIB}. Pro účely vytvoření simulačního modelu
 	\cite[snímek 44]{IMS_slides} se využilo standardních nástrojů
@@ -178,15 +174,15 @@
 	zaokrouhlí, aby byl dělitelný maximální kapacitou aut. Na validitu to má
 	nepatrný vliv, až zanedbatelný, jelikož jsou údaje zprůměrovány. Dále
 	značka auta, spotřeba paliva a~cena nejsou pro model důležitá, tyto
-	informace budou použity při experimentech se snahou o zefektivnění systému. Přesto, že tato
-	situace reálně často, díky již nabraným zkušenostem z~reality, nenastává,
-	pro lepší experimentování je přidán druhý koncový stav, který znamená,
-	že směna skončí dříve, než jsou rozvezena všechna jídla, tedy nějaká
-	jídla zbydou na skladě. Tento stav značí neúspěšné dokončení směny,
-	protože se nestihlo rozvézt všechno jídlo v~časovém limitu. Předpokládá se
-	také, že auto, které započne ještě během pracovní směny svůj cyklus, ho
-	celý dokončí. Ovšem pokud mezitím skončila směna, znamená to, že byl
-	rozvoz neúspěšný z~časového hlediska.
+	informace budou použity při experimentech se snahou o~zefektivnění systému.
+	Přesto, že tato situace reálně často, díky již nabraným zkušenostem
+	z~reality, nenastává, pro lepší experimentování je přidán druhý koncový
+	stav, který znamená, že směna skončí dříve, než jsou rozvezena všechna
+	jídla, tedy nějaká jídla zbydou na skladě. Tento stav značí neúspěšné
+	dokončení směny, protože se nestihlo rozvézt všechno jídlo v~časovém
+	limitu. Předpokládá se také, že auto, které započne ještě během pracovní
+	směny svůj cyklus, ho celý dokončí. Ovšem pokud mezitím skončila směna,
+	znamená to, že byl rozvoz neúspěšný z~časového hlediska.
 
 
 	\subsection{Popis konceptuálního modelu}
@@ -470,10 +466,11 @@
 	\subsubsection{Experiment 4}
 	\label{section:experiment4}
 
-	Díky poslednímu experimentu je snaha dojít k~závěru, jestli systém ustojí
-	i~při větších číslech. Zvýšení počtu průměrně rozvážených jídel na 40\,000
-	a~zároveň požadavek zrychení rozvozu o~hodinu, takže maximální přípustný
-	čas je 5 hodin. Proměná bude počet aut, nezáleží na ceně.
+	Díky poslednímu experimentu, viz tabulka \ref{table:experiment4}, je snaha
+	dojít k~závěru, jestli systém ustojí i~při větších číslech. Zvýšení počtu
+	průměrně rozvážených jídel na 40\,000 a~zároveň požadavek zrychení
+	rozvozu o~hodinu, takže maximální přípustný čas je 5 hodin. Proměná bude
+	počet aut, nezáleží na ceně.
 
 	\begin{table}[ht]
 		\centering
