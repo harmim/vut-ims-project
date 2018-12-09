@@ -46,7 +46,7 @@ private:
 	/**
 	 * Prints end of shift information.
 	 */
-	void printEndOfShift();
+	void PrintEndOfShift();
 };
 
 

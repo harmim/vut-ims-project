@@ -70,12 +70,12 @@ private:
 	/**
 	 * Prints start of shift information.
 	 */
-	void printStartOfShift();
+	void PrintStartOfShift();
 
 	/**
 	 * Prints end of shift information.
 	 */
-	void printEndOfShift();
+	void PrintEndOfShift();
 };
 
 
