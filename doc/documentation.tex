@@ -106,8 +106,8 @@
 	Zákazníci mají předem objednaná jidla od firmy Freshbox, která tato jídla
 	každý den od 6:30 hodin do 12:30 hodin (tj. 6 hodin) rozváží zákazníkům po
 	Brně a~okolí. Firma Freshbox rozváží jidlo 16 auty, přičemž jedno auto
-	je schopné naložit maximálně 500 jídel. Každý den se rozváží
-	průměrně 21\,200 jídel $\pm$\,1\,000 jídel. Firma má na začátku rozvozu
+	je schopno pojmout maximálně 500 jídel. Každý den se rozváží
+	průměrně 21\,200 jídel $\pm$\,1\,000 jídel včetně polévek, salátů a dezertů. Firma má na začátku rozvozu
 	již všechna jídla připravena a~v~6:30 hodin se připraví všechna auta,
 	do kterých se naloží maximální počet jídel, který je dán maximální
 	kapacitou auta. Naložení jednoho auta průměrně trvá 11 minut
@@ -120,7 +120,7 @@
 		}
 	} nafty při městském provozu. Když auto rozveze všechna naložená jídla,
 	vrátí se na pobočku Freshbox, aby se mohla naložit další jídla. Samotné
-	nakládání jídel provádí sám řadič daného auta. Tento proces se opakuje
+	nakládání jídel provádí sám řidič daného auta. Tento proces se opakuje
 	tak dlouho, dokud nejsou rozvezena všechna jídla. Jeden zákazník
 	(právnická nebo fyzická osoba) si samozřejmě může objednat více jídel na
 	jedno místo doručení, což se typicky děje, protože pravidelnými zákazníky
@@ -142,9 +142,9 @@
 
 	\subsection{Popis původu použitých metod/technologií}
 
-	Použili jsme standardní třídy a~funkce jazyka
-	C++\footnote{\url{https://cppreference.com/w/cpp}}.
-	Drželi jsme se standardu C++14. Využívali jsme monžosti oběktově
+	Byly použity standardní třídy a~funkce jazyka
+	C++\footnote{\url{https://cppreference.com/w/cpp}}, přičemž
+	byl dodržen standard C++14. Využívá se také monžosti oběktově
 	orientovaného návrhu.
 
 	Pro překlad zdrojových souborů byly použity nástroje
@@ -153,10 +153,10 @@
 
 	Knihovna SIMLIB byla získána z~oficálních stránek tohoto
 	nástroje\footnote{\url{http://www.fit.vutbr.cz/~peringer/SIMLIB}}.
-	Použili jsme nejnovější dostupnou verzi (ke dni \today), tj 3.07.
+	Použila byla nejnovější dostupná verze (ke dni \today), tj 3.07.
 	Autory tohoto nástroje jsou Petr Peringer, David Leska a~David Martinek,
-	viz \cite{SIMLIB}. Pro účely vytvoření našeho simulačního modelu
-	\cite[snímek 44]{IMS_slides} jsme používali standardní nástroje
+	viz \cite{SIMLIB}. Pro účely vytvoření simulačního modelu
+	\cite[snímek 44]{IMS_slides} se využilo standardních nástrojů
 	a~rohraní této knihovny.
 
 
@@ -168,9 +168,9 @@
 	\cite[snímek 48]{IMS_slides} nad systémem, který je brán ze své podstaty
 	jako systém hromadné obsluhy \cite[snímek 136]{IMS_slides}. Při vytváření
 	je potřeba vybrat ze všech údajů ty podstatné informace pro model.
-	Z~rozboru tématu plyne, že je důležité namodelovat všecho, co souvisí se
+	Z~rozboru tématu plyne, že je důležité namodelovat všechno, co souvisí se
 	samotným rozvozem. Díky skutečnosti, že všechny jednotlivé údaje jsou
-	zprůměrovány, je zapotřebí simulovat průběh jednoho dne, přičemž se
+	zprůměrovány, je zapotřebí simulovat průběh jen jednoho dne, přičemž se
 	samozřejmě může den ode dne nepatrně lišit.	Na oba proměnné časové údaje
 	při modelování se tedy použije rovnoměrné rozdělení
 	\cite[snímek 89]{IMS_slides} s~vyhovující odchylkou. Aby se model
@@ -178,12 +178,12 @@
 	zaokrouhlí, aby byl dělitelný maximální kapacitou aut. Na validitu to má
 	nepatrný vliv, až zanedbatelný, jelikož jsou údaje zprůměrovány. Dále
 	značka auta, spotřeba paliva a~cena nejsou pro model důležitá, tyto
-	informace budou použity při zefektivňování systému. Přesto, že tato
+	informace budou použity při experimentech se snahou o zefektivnění systému. Přesto, že tato
 	situace reálně často, díky již nabraným zkušenostem z~reality, nenastává,
 	pro lepší experimentování je přidán druhý koncový stav, který znamená,
-	že směna skončí dříve než jsou rozvezena všechna jídla, tedy nějaká
+	že směna skončí dříve, než jsou rozvezena všechna jídla, tedy nějaká
 	jídla zbydou na skladě. Tento stav značí neúspěšné dokončení směny,
-	protože se nestihlo rozvést všechno jídlo v~časovém limitu. Předpokládá se
+	protože se nestihlo rozvézt všechno jídlo v~časovém limitu. Předpokládá se
 	také, že auto, které započne ještě během pracovní směny svůj cyklus, ho
 	celý dokončí. Ovšem pokud mezitím skončila směna, znamená to, že byl
 	rozvoz neúspěšný z~časového hlediska.
@@ -223,7 +223,7 @@
 	čas \cite[snímek 21]{IMS_slides} začátku experimentu, počet dostupných
 	aut pro rozvážení jídla a~počet jídla, které je potřeba rozvézst. Na
 	konci každého z~experimentů se vypíše modelový čas konce experimentu,
-	počet jídel, které se nestihly rozvést, celková auty ujetá vzdálenost,
+	počet jídel, které se nestihly rozvézt, celková auty ujetá vzdálenost,
 	celková spotřeba pohonných hmot všech aut, informace o~skladu
 	\cite[snímek 184]{IMS_slides} aut a~statistiky ohledně času nakládání aut,
 	době trvání rozvozu jídel, ujeté vzdálenosti a~spotřebě aut.
@@ -284,7 +284,7 @@
 	\subsection{Mapování konceptuálního modulu do simulačního modelu}
 
 	Jak je popsáno v~kapitole \ref{section:conceptual_model_desc}
-	a~znázorněno v~Petriho síťi v~příloze \ref{appendix:petri_net}, časovač,
+	a~znázorněno v~Petriho síti v~příloze \ref{appendix:petri_net}, časovač,
 	který ukončí směnu po uplynutí konce směny, je v~simulačním modelu
 	implementován jako událost \cite[snímek 169]{IMS_slides}, která
 	při jejím vytvoření naplánuje sama sebe na čas, kdy má pracovní směna
@@ -299,8 +299,8 @@
 	je znázorněno algoritmem \ref{algorithm:workshift}. Tomuto procesu
 	v~simulačním modelu odpovídá třída \texttt{WorkShift}.
 
-	Rozvoz jídla auty je v~simulačním modelu implementováno procesem, jehož
-	chování je znázorněno na algoritmu \ref{algorithm:car}. Tomuto process
+	Rozvoz jídla auty je v~simulačním modelu implementován procesem, jehož
+	chování je znázorněno na algoritmu \ref{algorithm:car}. Tomuto procesu
 	v~simulačním moodelu odpovídá třída \texttt{Car}.
 
 
@@ -346,12 +346,12 @@
 	Každý experiment spočíval ve spuštění simulace 5krát po sobě v~cyklu se
 	zvolenými hodnotami. Všechny podstatné výstupní údaje se poté vložily do
 	tabulky a~zprůměrovaly. V~každém experimentu také probíhala kontrola
-	úspěšnosti, tedy zda se stihlo rozvést všechno jídlo během směny. Pokud
+	úspěšnosti, tedy zda se stihlo rozvézt všechno jídlo během směny. Pokud
 	směna skončila v~momentě, kdy bylo alespoň 1 auto na cestě, experiment se
 	označil za neúspěch. Pokud není stoprocentní úspěšnost, nelze počítat,
 	že je experiment validní a~celý se považuje za neúspěšný. Nakonec se
 	z~výsledků učiní závěr a~pokud nebyl experiment úspěšný, jsou na základě
-	těchto dat zvoleny nové vstupní hodnoty pro další experiment. \\
+	těchto informací zvoleny nové vstupní hodnoty pro další experiment. \\
 
 	\textbf{Postup experimentování lze tedy shrnout následovně:}
 	\begin{enumerate}
@@ -497,7 +497,7 @@
 	Už po dvou experimentech se podařilo dosáhnout stoprocentní úspěšnosti. Při
 	40 autech byly nějaké pokusy neúspěšné, ale při 42 autech se stihla všechna
 	jídla rozvézt průměrně za 3 hodiny a~50 minut, což je dokonce o~hodinu
-	rychleji než bylo požadováno.
+	rychleji než bylo požadováno. Dá se tedy tvrdit, že je systém schopen růstu.
 
 
 	\subsection{Závěry experimentů}
@@ -526,12 +526,12 @@
 	%%%%%%%%%%%%%%%%% Shrnutí simulačních experimentů a~závěr %%%%%%%%%%%%%%%%%%
 	\section{Shrnutí simulačních experimentů a~závěr}
 
-	Simulačními experimenty provedenými na našem modelu, viz
+	Simulačními experimenty provedenými na vytvořeném modelu, viz
 	kapitola \ref{section:experiment1}, byla ověřena jeho validita, protože
 	při výchozích hodnotách parametrů modelu, které odpovídají získaným
 	reálným faktům, se model chová analogicky k~reálnému systému.
 
-	Studií provedenou na našem modelu bylo prokázáno, že systém je navržený
+	Studií provedenou na modelu bylo prokázáno, že systém je navržený
 	tak, že za současných podmínek se vždy během pracovní směny stihne
 	rozvézt všechno objednané jídlo jednotlivým zákazníkům. Z~výsledků
 	simulačních experimentů dále vyplývá, že systém je za současných
@@ -547,7 +547,7 @@
 	nástroj byl implementován v~jazyce C++ za použití knihovny SIMLIB.
 	Při spuštění tohoto nástroje je možné měnit některé vstupní parametry
 	systému a~provádět tak různé simulační experimenty. Výstupem nástroje
-	jsou statistiky a~informace o~systému po skončení simulace, viz
+	jsou statistiky a~informace o~systému po skončení simulace, viz kapitola
 	\ref{section:simulation_model_architecture}.
 
 
